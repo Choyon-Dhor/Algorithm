@@ -1,0 +1,63 @@
+/* Test Case: 
+6
+A 1 4
+B 3 5
+C 0 6
+D 5 7
+E 8 9
+F 5 9
+*/
+
+#include <bits/stdc++.h>
+using namespace std;
+
+typedef struct Activity 
+{
+    char name;
+    int start, finish;
+} Activity;
+
+int main() 
+{
+    int n;
+    cin >> n;
+    
+    if (n <= 0) 
+    {
+        cout << "No activities to select." << endl;
+        return 0;
+    }
+
+    Activity arr[n];
+    for (int i = 0; i < n; i++) 
+    {
+        cin >> arr[i].name >> arr[i].start >> arr[i].finish;
+    }
+
+    sort(arr, arr + n, [](Activity a, Activity b) 
+    {
+        return a.finish < b.finish;
+    });
+
+    int ac[n]; // Array to store the selected activities
+    int j = 0;
+    int last_finish_time = arr[0].finish;
+    ac[j++] = 0; // Always select the first activity
+
+    for (int i = 1; i < n; i++) 
+    {
+        if (arr[i].start >= last_finish_time) 
+        {
+            ac[j++] = i;
+            last_finish_time = arr[i].finish;
+        }
+    }
+
+    for (int i = 0; i < j; i++) 
+    {
+        cout << arr[ac[i]].name << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
