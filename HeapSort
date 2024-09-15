@@ -1,3 +1,5 @@
+// Here we used MaxHeap for heapifying 
+
 #include <bits/stdc++.h>
 using namespace std;
 void heapify(int arr[], int n, int i)
